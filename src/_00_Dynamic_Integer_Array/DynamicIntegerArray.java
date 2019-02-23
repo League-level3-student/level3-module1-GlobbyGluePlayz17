@@ -1,5 +1,8 @@
 package _00_Dynamic_Integer_Array;
 
+import java.util.Arrays;
+import java.util.concurrent.SynchronousQueue;
+
 public class DynamicIntegerArray {
 	// 1. Create a private int array. Don't initialize it.
 	private int[] ints;
@@ -78,7 +81,7 @@ public class DynamicIntegerArray {
 		// A. create a new array that is one element smaller than the member array
 		int[] innts = new int[ints.length - 1];
 		// B. make a for loop to iterate through the member array
-		for (int i = 0; i < innts.length; i++) {
+		for (int i = 0; i < ints.length; i++) {
 			// C. if i is less than location
 			// set the element at i of the new array to the element at i of the member array
 			if (i < location) {
@@ -89,10 +92,11 @@ public class DynamicIntegerArray {
 			// array
 			else if (i > location) {
 				innts[i - 1] = ints[i];
+				
 			}
 			// E. else, continue;
 			else {
-
+				continue;
 			}
 		}
 		// F. set the member array equal to the new array
