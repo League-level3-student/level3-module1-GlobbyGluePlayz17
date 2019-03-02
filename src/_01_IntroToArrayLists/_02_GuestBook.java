@@ -19,44 +19,43 @@ import javax.swing.JPanel;
 // Guest #4: Donny Doners
 
 public class _02_GuestBook implements ActionListener {
+	JFrame frame = new JFrame();
+	JPanel panel = new JPanel();
+	JButton addname = new JButton();
+	JButton viewnames = new JButton();
+	
+	ArrayList<String> names = new ArrayList<String>();
+	
 	public static void main(String[] args) {
 		_02_GuestBook gb1 = new _02_GuestBook();
 		gb1.createUI();
 	}
 	
 	public void createUI() {
-		JFrame frame = new JFrame();
-		JPanel panel = new JPanel();
-		JButton addname = new JButton();
-		JButton viewnames = new JButton();
-		
 		frame.add(panel);
 		panel.add(addname);
 		panel.add(viewnames);
 		frame.setVisible(true);
-		frame.pack();
 		addname.setText("Add Name");
 		viewnames.setText("View Names");
 		addname.addActionListener(this);
 		viewnames.addActionListener(this);
-		
-		ArrayList<String> names = new ArrayList<String>();
-		
-		if () {
-			String inputname = JOptionPane.showInputDialog("Please enter a name.");
-			names.add("Guest #1: " + inputname + "\n");
-		}
-		
-		if (condition) {
-			JOptionPane.showMessageDialog(null, names);
-		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getSource().equals()) {
-			
+		if (e.getSource().equals(addname)) {
+			String inputname = JOptionPane.showInputDialog("Please enter a name.");
+			names.add(inputname);
+		}
+		
+		if (e.getSource().equals(viewnames)) {
+			String qwerty = "";
+			for (int i = 0; i < names.size(); i++) {
+				qwerty = qwerty + "Guest #" + (i+1) + ": " + names.get(i) + "\n";
+			}
+			JOptionPane.showMessageDialog(null, qwerty);
 		}
 	}
 	
