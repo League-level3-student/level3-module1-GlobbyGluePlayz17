@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
+import javax.swing.text.StyledEditorKit.ForegroundAction;
 
 public class _05_LongChipCompetition {
 	/**
@@ -13,12 +14,11 @@ public class _05_LongChipCompetition {
 	 * initialize The Beatles before you start your search. *
 	 **/
 	private ArrayList<Beatle> theBeatles = new ArrayList<Beatle>();
-
+	
 	public static void main(String[] args) {
 		_05_LongChipCompetition lcc = new _05_LongChipCompetition();
 		lcc.initializeBeatles();
 	}
-	
 	
 	private void initializeBeatles() {
 		Beatle george = new Beatle("George");
@@ -29,6 +29,14 @@ public class _05_LongChipCompetition {
 		theBeatles.add(john);
 		theBeatles.add(paul);
 		theBeatles.add(ringo);
+		
+		for (int i = 0; i < theBeatles.size(); i++) {
+			for (int j = 0; j < theBeatles.get(i).getChips().size(); j++) {
+				if (theBeatles.get(i).getChips().get(j) > theBeatles.get(i).getChips().get(j++)) {
+					
+				}
+			}
+		}
 	}
 	
 	public ArrayList<Beatle> getTheBand(){
