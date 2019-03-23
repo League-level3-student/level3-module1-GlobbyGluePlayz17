@@ -30,13 +30,22 @@ public class _05_LongChipCompetition {
 		theBeatles.add(paul);
 		theBeatles.add(ringo);
 		
+		double longestchip = 0.0;
+		String personwiththelongestchipp = "";
+		
 		for (int i = 0; i < theBeatles.size(); i++) {
 			for (int j = 0; j < theBeatles.get(i).getChips().size(); j++) {
-				if (theBeatles.get(i).getChips().get(j) > theBeatles.get(i).getChips().get(j++)) {
-					
+				if (longestchip < theBeatles.get(i).getChips().get(j).getLength()) {
+					longestchip = theBeatles.get(i).getChips().get(j).getLength();
+					personwiththelongestchipp = theBeatles.get(i).getName();
+				} else {
+					longestchip = longestchip;
 				}
 			}
+			System.out.println(longestchip);
+			System.out.println(personwiththelongestchipp);
 		}
+		System.out.println("\n" + personwiththelongestchipp + " is the Beatle with the longest chip, it having a length of " + longestchip + ".");
 	}
 	
 	public ArrayList<Beatle> getTheBand(){

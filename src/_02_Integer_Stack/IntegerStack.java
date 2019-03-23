@@ -2,7 +2,7 @@ package _02_Integer_Stack;
 
 public class IntegerStack {
 	//1. create a private array of integers
-	
+	private int[] ints = new int[5];
 	//2. complete the constructor by initializing the member array
 	//   to a new array of length 0. This prevents null pointer exceptions.
 	public IntegerStack() {

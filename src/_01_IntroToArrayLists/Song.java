@@ -13,6 +13,8 @@ public class Song {
 	private AdvancedPlayer mp3Player;
 	private InputStream songStream;
 
+	
+	
 	/**
 	 * Songs can be constructed from files on your computer or Internet addresses. *
 	 * Examples: <code>
@@ -21,6 +23,7 @@ public class Song {
 	Vampires of the City/03 Step.mp3"); * new
 	Song("http://freedownloads.last.fm/download/569264057/Get%2BGot.mp3"); * </code>
 	 */
+	
 	public Song(String songAddress) {
 		this.songAddress = songAddress;
 	}
