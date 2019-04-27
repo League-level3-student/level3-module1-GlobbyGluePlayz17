@@ -31,8 +31,9 @@ public class _03_TestMatchingBrackets {
 			} else if (brackets.empty()) {
 				result = "false";
 				
-			} //else if (!brackets.contains('{') && !brackets.empty()) {
-				//result = "false";
+			} else if (!brackets.contains('{') && !brackets.empty()) {
+				result = "false";
+			}
 				
 			 else {
 				brackets.pop();
@@ -40,12 +41,15 @@ public class _03_TestMatchingBrackets {
 			}
 		}
 		
+		if (!brackets.empty()) {
+			result = "false";
+		}
+		
 		if (result == "true") {
 			return true;
 			
 		} else {
 			return false;
-			
 		}
 		
 	}
