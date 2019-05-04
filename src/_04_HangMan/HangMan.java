@@ -9,10 +9,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.xml.stream.events.Characters;
 
 public class HangMan implements KeyListener{
 	
 	Stack<String> wordlibrary = new Stack<String>();
+	Stack<Character> charlibrary = new Stack<Character>();
 	
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
@@ -22,11 +24,13 @@ public class HangMan implements KeyListener{
 	int lives = 0;
 	int indexofchar = 0;
 	
+	StringBuilder sb;
+	
 	public void createUI() {
 		frame.add(panel);
 		panel.add(label);
 		frame.setTitle("Hangman");
-		frame.pack();
+		frame.setSize(300, 55);
 		frame.addKeyListener(this);
 	}
 	
@@ -39,10 +43,12 @@ public class HangMan implements KeyListener{
 	}
 	
 	public void step1() {
-		String wordguessnumS = JOptionPane.showInputDialog("Welcome to Hangman! \nEnter the number of words you want to guess from 1 to 266.");
+		String wordguessnumS = JOptionPane.showInputDialog("Welcome to Hangman!\nEnter the number of words you want to guess from 1 to 266.");
 		int wordguessnumI = Integer.parseInt(wordguessnumS);
 		
+		wordlibrary.push(""); //extraword
 		for (int i = 0; i < wordguessnumI; i++) {
+			System.out.println("getting word");
 			wordlibrary.push(Utilities.readRandomLineFromFile("dictionary.txt"));
 		}
 	}
@@ -55,7 +61,7 @@ public class HangMan implements KeyListener{
 			label.setText(label.getText() + "_");
 		}
 		lives = chosenword.length()+5;
-		label.setText(label.getText() + " Lives Remaining: " + lives);
+		label.setText(label.getText() + "   Lives Remaining: " + lives);
 	}
 
 
@@ -69,28 +75,45 @@ public class HangMan implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		Character c = e.getKeyChar();
-		
-		for (int i = 0; i < chosenword.length(); i++) {
-			if (c.equals(chosenword.charAt(i))) {
-				label.setText(label.getText().substring(0, i) + c + label.getText().substring(i+1));
-			} 
-		}
-//			
-//			else if (!c.equals(chosenword.charAt(i))) {
-//				lives--;
-//				String revisetext1 = label.getText().substring(0, label.getText().length()-1);
-//				System.out.println(revisetext1);
-//				label.setText(revisetext1 + lives);
-//			}
-	}
-
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	
+	
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		Character c = e.getKeyChar();
+		
+		sb = new StringBuilder(label.getText());
+		
+		for (int i = 0; i < chosenword.length(); i++) {
+			if (c.equals(chosenword.charAt(i))) {
+				sb.setCharAt(i, c);
+			} 
+		}
+		label.setText(sb.toString());
+		
+		if (!label.getText().contains("_")) {
+			JOptionPane.showMessageDialog(null, "Good job! Next word.");
+			label.setText("");
+			chosenword = wordlibrary.pop();
+			System.out.println(chosenword);
+			for (int i = 0; i < chosenword.length(); i++) {
+				label.setText(label.getText() + "_");
+			}
+			lives = chosenword.length()+5;
+			label.setText(label.getText() + "   Lives Remaining: " + lives);
+			
+			if (wordlibrary.isEmpty()) {
+				label.setText("");
+				frame.setVisible(false);
+				JOptionPane.showMessageDialog(null, "Good job, you win!");
+			}
+		}
+		
+		if (lives == 0) {
+			JOptionPane.showInputDialog("GAME OVER! \n You ran out of lives! Play again?");
+		}
+	}
 	
 }
