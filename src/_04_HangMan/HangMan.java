@@ -23,6 +23,7 @@ public class HangMan implements KeyListener{
 	String chosenword = "";
 	int lives = 0;
 	int indexofchar = 0;
+	String livesindicator = "";
 	
 	StringBuilder sb;
 	
@@ -89,8 +90,21 @@ public class HangMan implements KeyListener{
 		for (int i = 0; i < chosenword.length(); i++) {
 			if (c.equals(chosenword.charAt(i))) {
 				sb.setCharAt(i, c);
+				livesindicator = "true";
 			} 
 		}
+		
+//		String revisetxt = label.getText();
+//		
+//		for (int i = 0; i < revisetxt.length(); i++) {
+//			if (livesindicator == "true") {
+//				lives--;
+//				revisetxt = revisetxt.substring(0-i, i+1-revisetxt.length());
+//				label.setText(revisetxt + "   Lives Remaining: " + lives);
+//				System.out.println(label.getText());
+//			}
+//		}
+		
 		label.setText(sb.toString());
 		
 		if (!label.getText().contains("_")) {
