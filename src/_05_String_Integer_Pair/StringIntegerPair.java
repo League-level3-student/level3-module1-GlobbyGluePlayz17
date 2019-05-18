@@ -7,6 +7,7 @@ public class StringIntegerPair {
 	private String[] keys;
 	//2. create a private array of integers called values.
 	private int[] values;
+		
 	StringIntegerPair(){
 		//3. initialize both member arrays to a length of 0
 		keys = new String[0];
@@ -31,13 +32,13 @@ public class StringIntegerPair {
 		//D. set the last element of the new String array to the passed in key
 		keyss[keyss.length-1] = key;
 		//E. set the last element of the new int array to the passed in value
-		valuess[values.length-1] = value;
+		valuess[valuess.length-1] = value;
 		//F. iterate through the keys and values and copy the elements to the new arrays
 		for (int i = 0; i < keys.length; i++) {
-			keys[i] = keyss[i];
+			keyss[i] = keys[i];
 		}
-		for (int i = 0; i < valuess.length; i++) {
-			values[i] = valuess[i];
+		for (int i = 0; i < values.length; i++) {
+			valuess[i] = values[i];
 		}
 		//G. Set the keys and values arrays equal to the new arrays created in steps B and C.
 		keys = keyss;
@@ -47,32 +48,59 @@ public class StringIntegerPair {
 	//5. Complete the method so it returns the value located at the passed in key.
 	//   If the key does not exist, return Integer.MIN_VALUE.
 	public int get(String key) {
-		return values[0]; //fix
+		for (int i = 0; i < keys.length; i++) {
+			if (keys[i].equals(key)) {
+				return values[i];
+			}
+		}
+			return Integer.MIN_VALUE;
 	}
 	
 	//6. Complete the containsKey method so that it returns true if the
 	//   passed in keys is contained in the keys array
 	public boolean containsKey(String key) {
+		boolean torf2 = false;
+		
 		for (int i = 0; i < keys.length; i++) {
-			
+			if (keys[i] == key) {
+				torf2 = true;
+			}
 		}
-		return false;
+		
+		return torf2;
 	}
 	
 	//7. Complete the containsValue method so that it returns true if the
-	//   passed in value is contained in the values array
+	//   passed in value is contained in the values array	
 	public boolean containsValue(int value) {
+		boolean torf = false;
 		
-		return false;
+		for (int j = 0; j < keys.length; j++) {
+			if (values[j] == value) {
+				torf = true;
+			}
+		}
+		return torf;
 	}
 	
 	//8. Complete the getKeysMethod so it returns the keys as an array
+	
 	public String[] getKeys() {
-		return null;
+		String[] keysinanarray = new String[keys.length];
+		
+		for (int i = 0; i < keys.length; i++) {
+			keysinanarray[i] = keys[i];
+		}
+		return keysinanarray;
 	}
 	
 	//9. Complete the getValues so it returns the values as an array
 	public int[] getValues() {
-		return null;
+		int[] valuesinanarray = new int[values.length];
+		
+		for (int i = 0; i < keys.length; i++) {
+			valuesinanarray[i] = values[i];
+		}
+		return valuesinanarray;
 	}
 }
