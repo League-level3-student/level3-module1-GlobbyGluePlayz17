@@ -46,6 +46,9 @@ public class _02_LogSearch implements ActionListener {
 	JButton button2 = new JButton();
 	JButton button3 = new JButton();
 	
+	String messagedialog = "";
+	String list = "";
+	
 	public static void main(String[] args) {
 		_02_LogSearch ls1 = new _02_LogSearch();
 		ls1.createUI();
@@ -62,6 +65,8 @@ public class _02_LogSearch implements ActionListener {
 		button1.setText("Add an Entry");
 		button2.setText("Search by ID");
 		button3.setText("View List");
+		frame.setSize(400, 60);
+		frame.setTitle("LogSearcher");
 		frame.setVisible(true);
 		
 	}
@@ -80,25 +85,23 @@ public class _02_LogSearch implements ActionListener {
 		if (e.getSource() == button2) { 
 			if (keysnvalues.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "There are currently no entries available.");
-			}
+			} 
+			if (!keysnvalues.isEmpty()) {
+				//S = String; I = Integer
+				String inputkeyS = JOptionPane.showInputDialog("Please enter in the ID number for the name you want to find.");
+				Integer inputkeyI = Integer.parseInt(inputkeyS);
 			
-			//S = String; I = Integer
-			String inputkeyS = JOptionPane.showInputDialog("Please enter in an ID number.");
-			Integer inputkeyI = Integer.parseInt(inputkeyS);
-			
-			String messagedialog = "";
-			
-			for (Integer i : keysnvalues.keySet()) {
-				if (i.equals(inputkeyI)) {
-					messagedialog = "exists";
-					break;
-				} else {
-					messagedialog = "inexistent";
+				for (Integer i : keysnvalues.keySet()) {
+					if (i.equals(inputkeyI)) {
+						messagedialog = "exists";
+						JOptionPane.showMessageDialog(null, "The matching name to the ID number entered is: " + keysnvalues.get(i) + "");
+						break;
+					} else {
+						messagedialog = "inexistent";
+					}
 				}
 				
-				if (messagedialog.equals("exists")) {
-					JOptionPane.showMessageDialog(null, "The matching name to the ID number entered is " + keysnvalues.get(i) + ".");
-				} else {
+				if (messagedialog.equals("inexistent")) {
 					JOptionPane.showMessageDialog(null, "Sorry. The ID number you entered does not exist.");
 				}
 			}
@@ -107,10 +110,13 @@ public class _02_LogSearch implements ActionListener {
 		if (e.getSource() == button3) {
 			if (keysnvalues.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "There are currently no entries available.");
-			}
-			
-			for (Integer i: keysnvalues.keySet()) {
-				String list = list."ID: " + i + "    Name: " + keysnvalues.get(i) + "\n";
+			} else {
+			//if (!keysnvalues.isEmpty()) {
+				list = "";
+				for (Integer i: keysnvalues.keySet()) {
+					list += "ID: " + i + "    Name: " + keysnvalues.get(i) + "\n";
+				}
+				JOptionPane.showMessageDialog(null, list);
 			}
 		}
 	}
